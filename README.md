@@ -2,7 +2,7 @@
 
 ## Deploy
 
-### Requirements
+### Requirements
 
 - OCI Kubernetes Engine
 - `kubectl` configured
@@ -11,7 +11,7 @@ xxx
 
 ## Build and release
 
-### Requirements
+### Requirements
 
 - [podman](https://podman.io/)
 - [zx](https://github.com/google/zx)
