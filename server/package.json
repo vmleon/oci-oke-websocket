@@ -1,0 +1,35 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "WebSocket Server with socket.io",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js | pino-pretty"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vmleon/oci-oke-websocket.git"
+  },
+  "keywords": [
+    "OCI",
+    "OKE",
+    "WS"
+  ],
+  "author": "Victor Martin Alvarez (victor.martin.alvarez@oracle.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vmleon/oci-oke-websocket/issues"
+  },
+  "homepage": "https://github.com/vmleon/oci-oke-websocket#readme",
+  "dependencies": {
+    "pino": "^8.8.0",
+    "short-uuid": "^4.2.2",
+    "socket.io": "^4.5.4",
+    "tdigest": "^0.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "pino-pretty": "^9.1.1"
+  }
+}
