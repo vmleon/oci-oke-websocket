@@ -2,7 +2,7 @@
 
 import { getVersion, getNamespace } from "./scripts/utils.mjs";
 import { bump, validateBumpLevel } from "./scripts/npm.mjs";
-import { build_image, tag_image, push_image } from "./scripts/container.mjs";
+import { build_image, tagImage, pushImage } from "./scripts/container.mjs";
 
 const shell = process.env.SHELL | "/bin/zsh";
 $.shell = shell;
@@ -44,8 +44,8 @@ async function release_client() {
   await build_image(`localhost/${image_name}`, newVersion);
   const local_image = `localhost/${image_name}:${newVersion}`;
   const remote_image = `fra.ocir.io/${namespace}/${image_name}:${newVersion}`;
-  await tag_image(local_image, remote_image);
-  await push_image(remote_image);
+  await tagImage(local_image, remote_image);
+  await pushImage(remote_image);
   await cd("..");
 }
 
@@ -62,7 +62,7 @@ async function release_server() {
   await build_image(`localhost/${image_name}`, newVersion);
   const local_image = `localhost/${image_name}:${newVersion}`;
   const remote_image = `fra.ocir.io/${namespace}/${image_name}:${newVersion}`;
-  await tag_image(local_image, remote_image);
-  await push_image(remote_image);
+  await tagImage(local_image, remote_image);
+  await pushImage(remote_image);
   await cd("..");
 }

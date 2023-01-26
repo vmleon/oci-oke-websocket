@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "WebSocket Client with socket.io",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/vmleon/oci-oke-websocket#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "pino": "^8.8.0",
     "short-uuid": "^4.2.2",
     "socket.io-client": "^4.5.4"

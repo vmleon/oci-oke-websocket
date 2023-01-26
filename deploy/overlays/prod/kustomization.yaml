@@ -1,0 +1,13 @@
+bases:
+  - "../../base/ingress"
+  - "../../base/app"
+
+patchesStrategicMerge:
+  - "patch_server_replicas.yaml"
+
+# create secret ocirsecret
+
+images:
+- name: fra.ocir.io/fruktknlrefu/oci_oke_websocket/server
+  newName: fra.ocir.io/fruktknlrefu/oci_oke_websocket/server
+  newTag: v1.0.6

@@ -1,0 +1,7 @@
+resources:
+  - server.yaml
+  - server-svc.yaml
+configMapGenerator:
+  - name: server-env
+    files:
+      - .env=.env_server

@@ -1,20 +1,42 @@
 import { createServer } from "http";
+import express from "express";
 import { Server } from "socket.io";
+import { createTerminus } from "@godaddy/terminus";
 import { TDigest } from "tdigest";
 import pino from "pino";
 import short from "short-uuid";
+import * as dotenv from "dotenv";
+
+dotenv.config({ path: "./config/.env" });
 
 const logger = pino();
 const port = process.env.PORT | 3000;
+const environment = process.env.NODE_ENV || "development";
+logger.info(`Environment: ${environment}`);
 const serverId = short.generate();
 const td = new TDigest();
 
 let lags = [];
 const sizeLags = 20;
 
-const httpServer = createServer();
+const app = express();
+const httpServer = createServer(app);
 const io = new Server(httpServer, {
   /* options */
+});
+
+function onSignal() {
+  console.log("server is starting cleanup");
+}
+
+async function onHealthCheck() {
+  return;
+}
+
+createTerminus(httpServer, {
+  signal: "SIGINT",
+  healthChecks: { "/healthz": onHealthCheck },
+  onSignal,
 });
 
 io.on("connection", (socket) => {
