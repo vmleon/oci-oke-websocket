@@ -54,15 +54,9 @@ setInterval(() => {
 }, 1000);
 
 socket.on("status", (data) => {
-  const {
-    lagInMillis: lagInMillisOnServer,
-    timestamp,
-    numClients,
-    serverId,
-  } = data;
-  const now = Date.now();
-  const lagInMillisOnClient = now - timestamp;
+  const { timestamp, numClients, serverId } = data;
+  const lagInMillis = Date.now() - timestamp;
   logger.info(
-    `Server ${serverId} (${numClients} clients) - Lag server[${lagInMillisOnServer}ms]/[${lagInMillisOnClient}ms]client`
+    `Server ${serverId} (${numClients} clients) - Lag from server: ${lagInMillis} ms`
   );
 });

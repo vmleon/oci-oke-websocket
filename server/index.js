@@ -46,11 +46,9 @@ io.on("connection", (socket) => {
 
   socket.on("hey", (data) => {
     const { timestamp } = data;
-    const now = Date.now();
-    const lagInMillis = now - timestamp;
+    const lagInMillis = Date.now() - timestamp;
     socket.emit("status", {
-      lagInMillis,
-      timestamp: now,
+      timestamp: Date.now(),
       numClients: io.engine.clientsCount,
       serverId,
     });
