@@ -10,4 +10,4 @@ patchesStrategicMerge:
 images:
 - name: fra.ocir.io/fruktknlrefu/oci_oke_websocket/server
   newName: fra.ocir.io/fruktknlrefu/oci_oke_websocket/server
-  newTag: v1.0.7
+  newTag: v1.1.3

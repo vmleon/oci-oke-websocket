@@ -9,7 +9,7 @@ const logger = pino();
 const port = process.env.PORT | 3000;
 const environment = process.env.NODE_ENV || "development";
 logger.info(`Environment: ${environment}`);
-const clientId = short.generate();
+const clientId = short.generate().slice(0, 3);
 
 const wsServer =
   environment === "production"
@@ -22,7 +22,7 @@ const socket = io(wsServer, { transports: ["websocket"], requestTimeout: 20 });
 logger.info(`I am client ${clientId}`);
 
 socket.on("connect", () => {
-  logger.info(`Connect`);
+  logger.info(`Connected`);
 });
 
 socket.on("disconnect", () => {
@@ -50,8 +50,13 @@ socket.io.on("reconnect_failed", () => {
 });
 
 setInterval(() => {
-  socket.emit("hey", { timestamp: Date.now() });
-}, 1000);
+  socket.emit("hey", { timestamp: Date.now(), id: clientId });
+}, 5000);
+
+setInterval(() => {
+  logger.info("Message with my ID send");
+  socket.emit("message", { id: clientId });
+}, 10000);
 
 socket.on("status", (data) => {
   const { timestamp, numClients, serverId } = data;
@@ -59,4 +64,8 @@ socket.on("status", (data) => {
   logger.info(
     `Server ${serverId} (${numClients} clients) - Lag from server: ${lagInMillis} ms`
   );
+});
+
+socket.on("all", (data) => {
+  logger.info(`all: ${data}`);
 });

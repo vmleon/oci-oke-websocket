@@ -41,8 +41,12 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
-        envFrom:
-        - configMapRef:
-            name: server-env
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/src/server/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: server-env
       imagePullSecrets:
       - name: ocirsecret
